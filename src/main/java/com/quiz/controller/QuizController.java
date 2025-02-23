@@ -1,11 +1,8 @@
 package com.quiz.controller;
 
-import com.quiz.entity.QuizEntity;
-import com.quiz.service.QuizService;
+import com.quiz.entities.Quiz;
+import com.quiz.service.Impl.QuizServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,21 +12,21 @@ import java.util.List;
 public class QuizController {
 
     @Autowired
-    private QuizService quizService;
+    private QuizServiceImpl quizService;
+
+    @GetMapping("/getAllQuiz")
+    public List<Quiz> getAllQuiz(){
+        return quizService.getAllQuiz();
+    }
+
+    @GetMapping("/getQuizId/{id}")
+    public Quiz getQuizById(@PathVariable Long id){
+        return quizService.getById(id);
+    }
 
     @PostMapping("/addQuiz")
-    public QuizEntity addQuiz(@RequestBody QuizEntity quizEntity) {
-        return quizService.add(quizEntity);
+    public Quiz addQuiz(@RequestBody Quiz quiz){
+        System.out.println("Quiz App log "+quiz.getTitle());
+        return quizService.addQuiz(quiz);
     }
-
-    @GetMapping("/getQuiz")
-    public List<QuizEntity> getQuiz() {
-        return quizService.getQuiz();
-    }
-
-    @GetMapping("/getOne/id/{myid}")
-    public QuizEntity getOne(@PathVariable Long myid) {
-        return quizService.getById(myid);
-    }
-
 }

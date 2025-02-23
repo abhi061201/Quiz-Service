@@ -1,14 +1,14 @@
 package com.quiz.service;
 
-import com.quiz.entity.QuizEntity;
+import com.quiz.entities.Quiz;
 
 import java.util.List;
 
 public interface QuizService {
 
-    QuizEntity add(QuizEntity quizEntity);
+    Quiz addQuiz(Quiz quiz);
 
-    List<QuizEntity> getQuiz();
+    List<Quiz> getAllQuiz();
 
-    QuizEntity getById(Long id);
+    Quiz getById(Long id);
 }
